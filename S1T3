@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+        int left = 0;           // Left pointer starts at beginning
+        int right = nums.size() - 1; // Right pointer starts at end
+        
+        while (left < right) {
+            // Move left pointer until we find an ODD number
+            while (left < right && nums[left] % 2 == 0) {
+                left++;
+            }
+            
+            // Move right pointer until we find an EVEN number
+            while (left < right && nums[right] % 2 != 0) {
+                right--;
+            }
+            
+            // Swap the misplaced elements
+            if (left < right) {
+                swap(nums[left], nums[right]);
+                left++;
+                right--;
+            }
+        }
+        
+        return nums;
+    }
+};
