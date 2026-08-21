@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maximumWealth(vector<vector<int>>& accounts) {
+        int max_wealth = 0; // Track the maximum wealth found
+        
+        // Loop through each customer (each row)
+        for (const vector<int>& customer : accounts) {
+            int current_wealth = 0;
+            
+            // Sum all bank accounts for this customer
+            for (int money : customer) {
+                current_wealth += money;
+            }
+            
+            // Update max if current customer has more wealth
+            max_wealth = max(max_wealth, current_wealth);
+        }
+        
+        return max_wealth;
+    }
+};
