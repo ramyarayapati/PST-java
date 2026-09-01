@@ -1,0 +1,25 @@
+class Solution {
+    public boolean halvesAreAlike(String s) {
+        int n = s.length();
+        // First half indices: 0 to n/2 - 1
+        // Second half indices: n/2 to n - 1
+        int mid = n / 2;
+        
+        int countA = countVowels(s, 0, mid);
+        int countB = countVowels(s, mid, n);
+        
+        return countA == countB;
+    }
+    
+    // Helper to count vowels in range [start, end)
+    private int countVowels(String s, int start, int end) {
+        int count = 0;
+        String vowels = "aeiouAEIOU";
+        for (int i = start; i < end; i++) {
+            if (vowels.indexOf(s.charAt(i)) != -1) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
