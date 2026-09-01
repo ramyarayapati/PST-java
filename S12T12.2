@@ -1,0 +1,35 @@
+class Solution {
+    private String[] days = {"Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"};
+    
+    public String dayOfTheWeek(int day, int month, int year) {
+        int totalDays = 0;
+        
+        // 1. Count days for full years passed since 1971
+        for (int y = 1971; y < year; y++) {
+            totalDays += isLeap(y) ? 366 : 365;
+        }
+        
+        // 2. Count days for full months passed in current year
+        int[] monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        for (int m = 0; m < month - 1; m++) {
+            totalDays += monthDays[m];
+        }
+        
+        // Adjust Feb for leap year in current year
+        if (isLeap(year) && month > 2) {
+            totalDays += 1;
+        }
+        
+        // 3. Add days in current month
+        totalDays += day;
+        
+        // 4. Determine day index
+        // Note: We started totalDays from Jan 1 1971. 
+        // Jan 1 is 1st day.
+        return days[(totalDays - 1) % 7];
+    }
+    
+    private boolean isLeap(int y) {
+        return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
+    }
+}
